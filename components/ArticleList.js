@@ -1,21 +1,38 @@
-import React from "react";
-import { StyleSheet, Text, SafeAreaView, ScrollView, StatusBar } from 'react-native';
+import React, {useEffect, useState} from "react";
+import { StyleSheet, Text, SafeAreaView, StatusBar, FlatList, View } from 'react-native';
 
 const ArticleList = () => {
 console.log("Article List ");
+
+const [state, setState] = useState({data: {}, status: 'Idle', error:null});
+
+useEffect(()=>{
+  console.log("UseEffect called");
+  getArticleList();
+},[]);
+
+async function getArticleList() {
+
+  setState({...state, status: 'loading'});
+  await fetch('https://fake-movie-database-api.herokuapp.com/api?s=batman')
+  .then((resp) => resp.json())
+  .then((responsejson) => setState({data: responsejson.Search, status: 'resolved', error:null}))
+  .catch((error) => setState({data:{},status:'error',error:error}));
+  
+}
+
+const renderItem = ({ item }) => (
+    <View style={styles.item}>
+      <Text style={styles.title}>{item.Title}</Text>
+    </View>
+);
     return (
         <SafeAreaView style={styles.container}>
-          <ScrollView style={styles.scrollView}>
-            <Text style={styles.text}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-              minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-              aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-              pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum.
-            </Text>
-          </ScrollView>
+            <FlatList 
+            data={state.data}
+            renderItem={renderItem}
+            keyExtractor={item => item.imdbID}
+            />
         </SafeAreaView>
       );
     }
@@ -31,6 +48,15 @@ console.log("Article List ");
       },
       text: {
         fontSize: 42,
+      },
+      item: {
+        backgroundColor: '#f9c2ff',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16,
+      },
+      title: {
+        fontSize: 32,
       },
     });
     

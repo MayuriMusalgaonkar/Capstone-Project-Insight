@@ -9,11 +9,8 @@ const Login = ({navigation}) => {
   const [userName, onChangeuserName] = React.useState(null);
   const [password, onChangePassword] = React.useState(null);
   
- const loginHandler = () =>{
- navigation.navigate('ArticleList')
- }
+//  const loginHandler = () =>
 
- alert(userName);
   return(
   <SafeAreaView style={styles.container}>
     
@@ -21,13 +18,13 @@ const Login = ({navigation}) => {
       <Text>INSIGHT</Text>
     <TextInput
         style={styles.input}
-        onChangeText={onChangeuserName()}
+        onChangeText={onChangeuserName}
         value={userName}
         placeholder="UserName"
       />
       <TextInput
         style={styles.input}
-        onChangeText={onChangePassword()}
+        onChangeText={onChangePassword}
         value={password}
         placeholder="Password"
         
@@ -35,7 +32,9 @@ const Login = ({navigation}) => {
       <Button
         title="Login"
         color="#f194ff"
-        onPress={() => loginHandler}
+        onPress={() => {
+          navigation.navigate('ArticleList')
+          }}
       />
     </View>
     <Separator />
