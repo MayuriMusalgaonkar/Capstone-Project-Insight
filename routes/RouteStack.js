@@ -1,10 +1,13 @@
-import { NavigationContainer } from '@react-navigation/native';
 import Login from '../components/Login';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createStackNavigator } from 'react-navigation-stack';
 import ArticleList from '../components/ArticleList';
 import { createAppContainer } from 'react-navigation';
+import SplashScreen from '../components/SplashScreen';
 
 const screens ={
+SplashScreen:{
+    screen: SplashScreen
+},
 Login: {
     screen: Login
 },
@@ -13,6 +16,6 @@ ArticleList: {
 }
 } 
 
-const RouteStack = createNativeStackNavigator(screens);
+const RouteStack = createStackNavigator(screens);
 
 export default createAppContainer(RouteStack);
