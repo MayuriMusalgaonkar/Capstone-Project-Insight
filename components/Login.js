@@ -1,19 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Button, View, SafeAreaView, Text, Alert, TextInput } from 'react-native';
 import React from "react";
-import ArticleList from './ArticleList';
 
 const Separator = () => <View style={styles.separator} />;
-
-//New Changes
-
 
 const Login = ({navigation}) => {
   
   const [userName, onChangeuserName] = React.useState(null);
   const [password, onChangePassword] = React.useState(null);
   
- 
+ const loginHandler = () =>{
+ navigation.navigate('ArticleList')
+ }
+
+ alert(userName);
   return(
   <SafeAreaView style={styles.container}>
     
@@ -21,13 +21,13 @@ const Login = ({navigation}) => {
       <Text>INSIGHT</Text>
     <TextInput
         style={styles.input}
-        onChangeText={onChangeuserName}
+        onChangeText={onChangeuserName()}
         value={userName}
         placeholder="UserName"
       />
       <TextInput
         style={styles.input}
-        onChangeText={onChangePassword}
+        onChangeText={onChangePassword()}
         value={password}
         placeholder="Password"
         
@@ -35,8 +35,7 @@ const Login = ({navigation}) => {
       <Button
         title="Login"
         color="#f194ff"
-        onPress={() =>
-            navigation.navigate('ArticleList')}
+        onPress={() => loginHandler}
       />
     </View>
     <Separator />
