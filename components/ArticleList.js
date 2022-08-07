@@ -14,7 +14,20 @@ useEffect(()=>{
 async function getArticleList() {
 
   setState({...state, status: 'loading'});
-  await fetch('https://fake-movie-database-api.herokuapp.com/api?s=batman')
+  await fetch('https://data.mongodb-api.com/app/data-cijfe/endpoint/data/v1/action/find',{
+    method: 'POST', 
+    mode: 'cors', 
+    cache: 'no-cache', 
+    credentials: 'same-origin', 
+    headers: {
+      'Content-Type': 'application/json',
+      'Access-Control-Request-Headers': '*',
+      'api-key': 'zvvB0sCTMCMkkVTJ2hzJsxklizL0IJcp2pZ0yKmGk4AGGQfd3va03166ErC1miIU'
+    },
+    redirect: 'follow', 
+    referrerPolicy: 'no-referrer', 
+    body: JSON.stringify(data) 
+  })
   .then((resp) => resp.json())
   .then((responsejson) => setState({data: responsejson.Search, status: 'resolved', error:null}))
   .catch((error) => setState({data:{},status:'error',error:error}));
