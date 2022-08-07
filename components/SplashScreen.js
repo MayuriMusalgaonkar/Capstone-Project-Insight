@@ -7,10 +7,10 @@ import React, { useState,useEffect } from 'react';
 
     useEffect(
         () => {
-          let timer1 = setTimeout(() => hideSplashScreen(), 5000 );
+        //   let timer1 = setTimeout(() => hideSplashScreen(), 5000 );
     
           return () => {
-            clearTimeout(timer1);
+            // clearTimeout(timer1);
           };
         },
         []
@@ -21,15 +21,15 @@ import React, { useState,useEffect } from 'react';
 
   }  
    
-  console.warn("splashscreen!!!!"+isVisible);
+//   console.warn("splashscreen!!!!"+isVisible);
          return(  
              <View style = { styles.MainContainer }>  
                  { 
                  isVisible? 
                   <View style={styles.SplashScreen_RootView}>  
                      <View style={styles.SplashScreen_ChildView}>  
-                       <Image source={{uri:'https://static.javatpoint.com/tutorial/react-native/images/react-native-tutorial.png'}}  
-                        style={{width:'100%', height: '100%', resizeMode: 'contain'}} />  
+                       <Image source={require('../assets/images/splashScreen.png')}  
+                        style={styles.Image} />  
                      </View>  
                   </View> : null
                 }  
@@ -60,9 +60,18 @@ import React, { useState,useEffect } from 'react';
     {  
         justifyContent: 'center',  
         alignItems: 'center',  
-        backgroundColor: '#00BCD4',  
+        // backgroundColor: '#ffffff',  
         flex:1,  
     },  
+    Image:
+    {
+        width:'100%', 
+        height: '100%', 
+        resizeMode: 'contain',
+        // borderWidth:  1,
+        // height:50,
+        
+    }
 });  
 
 export default SplashScreen;
