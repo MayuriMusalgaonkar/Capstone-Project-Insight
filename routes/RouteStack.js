@@ -5,9 +5,9 @@ import { createAppContainer } from 'react-navigation';
 import SplashScreen from '../components/SplashScreen';
 
 const screens ={
-SplashScreen:{
-    screen: SplashScreen
-},
+// SplashScreen:{
+//     screen: SplashScreen
+// },
 Login: {
     screen: Login
 },
