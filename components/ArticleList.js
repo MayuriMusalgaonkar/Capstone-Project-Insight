@@ -6,6 +6,7 @@ import {
   StatusBar,
   FlatList,
   View,
+  ActivityIndicator
 } from "react-native";
 
 const ArticleList = () => {
@@ -63,20 +64,26 @@ const ArticleList = () => {
       )
       .catch((error) => setState({ data: {}, status: "error", error: error }));
   }
-  // console.log(state.data);
+
   const renderItem = ({ item }) =>
     item.title !== "" ? (
       <View style={styles.item}>
         <Text style={styles.title}>{item.title}</Text>
       </View>
     ) : null;
+
+
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        data={state.data}
-        renderItem={renderItem}
-        keyExtractor={(item) => item._id}
-      />
+      {state.status === 'loading' ?
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <ActivityIndicator size="large" />
+        </View> :
+        <FlatList
+          data={state.data}
+          renderItem={renderItem}
+          keyExtractor={(item) => item._id}
+        />}
     </SafeAreaView>
   );
 };
