@@ -64,11 +64,12 @@ const ArticleList = () => {
       .catch((error) => setState({ data: {}, status: "error", error: error }));
   }
   // console.log(state.data);
-  const renderItem = ({ item }) => (
-    <View style={styles.item}>
-      <Text style={styles.title}>{item.title}</Text>
-    </View>
-  );
+  const renderItem = ({ item }) =>
+    item.title !== "" ? (
+      <View style={styles.item}>
+        <Text style={styles.title}>{item.title}</Text>
+      </View>
+    ) : null;
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
