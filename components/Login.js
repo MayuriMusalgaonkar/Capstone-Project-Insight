@@ -2,6 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   Button,
+  Pressable,
   View,
   SafeAreaView,
   Text,
@@ -22,33 +23,46 @@ const Login = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.upper}>
-      <Image
-         style={styles.logo}
-        source={require('../assets/images/login_logo.png')}
-      />
-      
+        <Image
+          style={styles.logo}
+          source={require("../assets/images/login_logo.png")}
+        />
+        <Text style={styles.textFonts}>Welcome Back</Text>
       </View>
       <View style={styles.lower}>
-        <Text>INSIGHT</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeuserName}
-          value={userName}
-          placeholder="UserName"
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangePassword}
-          value={password}
-          placeholder="Password"
-        />
-        <Button
-          title="Login"
-          color="#f194ff"
-          onPress={() => {
-            navigation.navigate("ArticleList");
-          }}
-        />
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.input}
+            onChangeText={onChangeuserName}
+            value={userName}
+            placeholder="UserName"
+          />
+          <TextInput
+            style={styles.input}
+            onChangeText={onChangePassword}
+            value={password}
+            placeholder="Password"
+          />
+          <Text
+            style={[
+              styles.textFonts,
+              { textAlign: "right", top: -10, marginLeft: 200 },
+            ]}
+          >
+            {" "}
+            Forgot Password?
+          </Text>
+        </View>
+        <View style={styles.buttonView}>
+          <Pressable
+            style={styles.btn}
+            onPress={() => {
+              navigation.navigate("ArticleList");
+            }}
+          >
+            <Text style={styles.signInText}>Sign In</Text>
+          </Pressable>
+        </View>
       </View>
       <Separator />
     </SafeAreaView>
@@ -60,17 +74,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     // marginHorizontal: 16,
-    backgroundColor: "#ffffff"
+    backgroundColor: "#ffffff",
   },
-  upper:{
+  upper: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
-  lower:{
+  lower: {
     flex: 3,
   },
-  logo:{
+  logo: {
     width: 280,
     height: 70,
   },
@@ -80,10 +94,43 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
+    borderBottomColor: "#1974D2",
+    borderBottomWidth: 1,
     padding: 10,
+    width: "80%",
+    marginBottom: 30,
+  },
+
+  textFonts: {
+    height: 18,
+    width: 121,
+    top: 25,
+    color: "#1974D2",
+    fontWeight: "400",
+  },
+  inputView: {
+    flex: 2,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  btn: {
+    width: 200,
+    backgroundColor: "#0E39A9",
+    paddingHorizontal: 30,
+    paddingVertical: 18,
+  },
+  buttonView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  signInText: {
+    fontSize: 20,
+    // fontWeight: 400,
+    lineHeight: 24,
+    letterSpacing: 0,
+    textAlign: "center",
+    color: "#ffffff",
   },
 });
 
