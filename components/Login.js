@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   Text,
   Alert,
+  Image,
   TextInput,
 } from "react-native";
 import React from "react";
@@ -20,7 +21,14 @@ const Login = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
+      <View style={styles.upper}>
+      <Image
+         style={styles.logo}
+        source={require('../assets/images/login_logo.png')}
+      />
+      
+      </View>
+      <View style={styles.lower}>
         <Text>INSIGHT</Text>
         <TextInput
           style={styles.input}
@@ -51,7 +59,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    marginHorizontal: 16,
+    // marginHorizontal: 16,
+    backgroundColor: "#ffffff"
+  },
+  upper:{
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  lower:{
+    flex: 3,
+  },
+  logo:{
+    width: 280,
+    height: 70,
   },
   separator: {
     marginVertical: 8,
