@@ -7,18 +7,34 @@ import {
   SafeAreaView,
   Text,
   Alert,
+  TouchableOpacity,
+  Dimensions,
   Image,
   TextInput,
+  useWindowDimensions,
 } from "react-native";
 import React from "react";
 
 const Separator = () => <View style={styles.separator} />;
 
+const listTab = [
+  {
+    status: "Sign In",
+  },
+  {
+    status: "Sign Up",
+  },
+];
+
 const Login = ({ navigation }) => {
+  const [email, onChangeEmail] = React.useState(null);
   const [userName, onChangeuserName] = React.useState(null);
   const [password, onChangePassword] = React.useState(null);
+  const [status, setStatus] = React.useState("Sign In");
 
-  //  const loginHandler = () =>
+  const setStatusFilter = (status) => {
+    setStatus(status);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -27,10 +43,42 @@ const Login = ({ navigation }) => {
           style={styles.logo}
           source={require("../assets/images/login_logo.png")}
         />
-        <Text style={styles.textFonts}>Welcome Back</Text>
+        <Text style={[styles.textFonts, { top: 50 }]}>
+          {status === "Sign Up" ? "WELCOME" : "WELCOME BACK"}
+        </Text>
       </View>
+      <View style={styles.listTab}>
+        {listTab.map((tab, index) => (
+          <TouchableOpacity
+            style={[
+              styles.btnTab,
+              status === tab.status && styles.btnTabActive,
+            ]}
+            key={index}
+            onPress={() => setStatusFilter(tab.status)}
+          >
+            <Text
+              style={
+                status === tab.status ? styles.textTabActive : styles.textTab
+              }
+            >
+              {tab.status}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
       <View style={styles.lower}>
         <View style={styles.inputView}>
+          {status === "Sign Up" && (
+            <TextInput
+              style={styles.input}
+              onChangeText={onChangeEmail}
+              value={email}
+              placeholder="Email Address"
+            />
+          )}
+
           <TextInput
             style={styles.input}
             onChangeText={onChangeuserName}
@@ -46,21 +94,20 @@ const Login = ({ navigation }) => {
           <Text
             style={[
               styles.textFonts,
-              { textAlign: "right", top: -10, marginLeft: 200 },
+              { top: -10, textAlign: "right", marginLeft: 210 },
             ]}
           >
-            {" "}
             Forgot Password?
           </Text>
         </View>
         <View style={styles.buttonView}>
           <Pressable
-            style={styles.btn}
+            style={[styles.btn, status === "Sign In" && { marginBottom: -68 }]}
             onPress={() => {
               navigation.navigate("ArticleList");
             }}
           >
-            <Text style={styles.signInText}>Sign In</Text>
+            <Text style={styles.signInBtn}>Sign In</Text>
           </Pressable>
         </View>
       </View>
@@ -77,12 +124,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
   },
   upper: {
-    flex: 1,
+    flex: 2,
     justifyContent: "center",
     alignItems: "center",
   },
+  logo: {
+    paddingBottom: 20,
+  },
   lower: {
-    flex: 3,
+    flex: 5,
   },
   logo: {
     width: 280,
@@ -93,23 +143,49 @@ const styles = StyleSheet.create({
     borderBottomColor: "#737373",
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
+  listTab: {
+    flex: 1,
+    paddingTop: 60,
+    flexDirection: "row",
+    marginLeft: 20,
+  },
+  btnTab: {
+    width: Dimensions.get("window").width / 3.5,
+    flexDirection: "row",
+    // padding: 10,
+    justifyContent: "center",
+  },
+  btnTabActive: {
+    // borderBottomWidth: 1,
+    // borderBottomColor:"#1974D2",
+  },
+  textTabActive: {
+    color: "#1974D2",
+    textDecorationLine: "underline",
+    fontSize: 24,
+  },
+  textTab: {
+    fontSize: 21,
+    color: "#C4C4C4",
+  },
   input: {
     borderBottomColor: "#1974D2",
     borderBottomWidth: 1,
     padding: 10,
     width: "80%",
-    marginBottom: 30,
+    marginBottom: 20,
   },
 
   textFonts: {
     height: 18,
     width: 121,
-    top: 25,
+    // top: 40,
     color: "#1974D2",
     fontWeight: "400",
+    textAlign: "center",
   },
   inputView: {
-    flex: 2,
+    // flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -124,7 +200,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  signInText: {
+  signInBtn: {
     fontSize: 20,
     // fontWeight: 400,
     lineHeight: 24,
