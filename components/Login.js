@@ -43,9 +43,29 @@ const Login = ({ navigation }) => {
           style={styles.logo}
           source={require("../assets/images/login_logo.png")}
         />
-        <Text style={[styles.textFonts, { top: 50 }]}>
-          {status === "Sign Up" ? "WELCOME" : "WELCOME BACK"}
-        </Text>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <View
+            style={{
+              flex: 1.2,
+              marginBottom: "-25%",
+              height: 1.5,
+              backgroundColor: "#1974D2",
+            }}
+          ></View>
+          <View style={{ flex: 1 }}>
+            <Text style={[styles.textFonts, { top: 50 }]}>
+              {status === "Sign Up" ? "WELCOME" : "WELCOME BACK"}
+            </Text>
+          </View>
+          <View
+            style={{
+              flex: 1.2,
+              marginBottom: "-25%",
+              height: 1.5,
+              backgroundColor: "#1974D2",
+            }}
+          ></View>
+        </View>
       </View>
       <View style={styles.listTab}>
         {listTab.map((tab, index) => (
@@ -76,6 +96,7 @@ const Login = ({ navigation }) => {
               onChangeText={onChangeEmail}
               value={email}
               placeholder="Email Address"
+              keyboardType="visible-password"
             />
           )}
 
@@ -84,12 +105,14 @@ const Login = ({ navigation }) => {
             onChangeText={onChangeuserName}
             value={userName}
             placeholder="UserName"
+            keyboardType="visible-password"
           />
           <TextInput
             style={styles.input}
             onChangeText={onChangePassword}
             value={password}
             placeholder="Password"
+            keyboardType="visible-password"
           />
           <Text
             style={[
@@ -127,9 +150,10 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: "center",
     alignItems: "center",
+    top: -20,
   },
   logo: {
-    paddingBottom: 20,
+    // paddingBottom: 20,
   },
   lower: {
     flex: 5,
@@ -139,9 +163,9 @@ const styles = StyleSheet.create({
     height: 70,
   },
   separator: {
-    marginVertical: 8,
-    borderBottomColor: "#737373",
-    borderBottomWidth: StyleSheet.hairlineWidth,
+    //  marginVertical: 8,
+    // borderBottomColor: "#737373",
+    // borderBottomWidth: StyleSheet.hairlineWidth,
   },
   listTab: {
     flex: 1,
@@ -174,6 +198,7 @@ const styles = StyleSheet.create({
     padding: 10,
     width: "80%",
     marginBottom: 20,
+    fontSize:18,
   },
 
   textFonts: {
