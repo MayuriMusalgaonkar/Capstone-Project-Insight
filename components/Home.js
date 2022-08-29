@@ -9,7 +9,7 @@ import {
   ActivityIndicator
 } from "react-native";
 
-const ArticleList = () => {
+const Home = () => {
   console.log("Article List ");
 
   const [state, setState] = useState({ data: {}, status: "Idle", error: null });
@@ -110,5 +110,4 @@ const styles = StyleSheet.create({
     fontSize: 32,
   },
 });
-
-export default ArticleList;
+export default Home;

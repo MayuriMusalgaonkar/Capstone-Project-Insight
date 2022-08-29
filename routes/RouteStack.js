@@ -1,8 +1,9 @@
 import Login from '../components/Login';
 import { createStackNavigator } from 'react-navigation-stack';
-import ArticleList from '../components/ArticleList';
+import Home from '../components/Home';
 import { createAppContainer } from 'react-navigation';
 import SplashScreen from '../components/SplashScreen';
+import OnBoardingList from '../components/OnBoardingList';
 
 const screens ={
 // SplashScreen:{
@@ -11,9 +12,13 @@ const screens ={
 Login: {
     screen: Login
 },
-ArticleList: {
-    screen: ArticleList
+OnBoardingList:{
+    screen: OnBoardingList
+},
+Home: {
+    screen: Home
 }
+
 } 
 
 const RouteStack = createStackNavigator(screens);

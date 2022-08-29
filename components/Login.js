@@ -1,17 +1,13 @@
-import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
-  Button,
   Pressable,
   View,
   SafeAreaView,
   Text,
-  Alert,
   TouchableOpacity,
   Dimensions,
   Image,
   TextInput,
-  useWindowDimensions,
 } from "react-native";
 import React from "react";
 
@@ -127,7 +123,7 @@ const Login = ({ navigation }) => {
           <Pressable
             style={[styles.btn, status === "Sign In" && { marginBottom: -68 }]}
             onPress={() => {
-              navigation.navigate("ArticleList");
+              navigation.navigate("OnBoardingList");
             }}
           >
             <Text style={styles.signInBtn}>Sign In</Text>
