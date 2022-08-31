@@ -6,38 +6,33 @@ import {
   StatusBar,
   FlatList,
   View,
-  ActivityIndicator
+  ActivityIndicator,
 } from "react-native";
 
-const Home = ({navigation, route}) => {
-  console.log("Article List ");
+const ContentDetails = ({ navigation }) => {
+  const itemId = navigation.getParam("itemId");
+  console.log(itemId);
 
   const [state, setState] = useState({ data: {}, status: "Idle", error: null });
 
   useEffect(() => {
     console.log("UseEffect called");
-    getArticleList();
+    getContentDetails();
   }, []);
 
-  async function getArticleList() {
+  async function getContentDetails(props) {
+    console.log("Inside Function:" + id);
     const body = {
       dataSource: "Cluster0",
       database: "articles",
       collection: "fs.files",
-      projection: {
-        _id: 1,
-        filename: 3,
-        author: 2,
-        title: 4,
-        Keywords: 5,
-        chunkSize: 6,
-        length: 7,
-        uploadDate: 8,
+      filter: {
+        author: "Sanaea C. Rose,Smadar Naoz,Re’em Sari,and Itai Linial",
       },
     };
     setState({ ...state, status: "loading" });
     await fetch(
-      "https://data.mongodb-api.com/app/data-cijfe/endpoint/data/v1/action/find",
+      "https://data.mongodb-api.com/app/data-cijfe/endpoint/data/v1/action/findOne",
       {
         method: "POST",
         mode: "cors",
@@ -55,12 +50,13 @@ const Home = ({navigation, route}) => {
       }
     )
       .then((resp) => resp.json())
-      .then((responseJson) =>
-        setState({
-          data: responseJson.documents,
-          status: "resolved",
-          error: null,
-        })
+      .then(
+        (responseJson) => 
+          setState({
+            data: responseJson.documents,
+            status: "resolved",
+            error: null,
+          })
       )
       .catch((error) => setState({ data: {}, status: "error", error: error }));
   }
@@ -68,26 +64,25 @@ const Home = ({navigation, route}) => {
   const renderItem = ({ item }) =>
     item.title !== "" ? (
       <View style={styles.item}>
-        <Text onPress={() => {
-              navigation.navigate('ContentDetails',{
-                itemId: item._id
-              });
-            }} style={styles.title}>{item.title}</Text>
+        <Text style={styles.title}>{item.title}</Text>
       </View>
     ) : null;
 
-
   return (
     <SafeAreaView style={styles.container}>
-      {state.status === 'loading' ?
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      {state.status === "loading" ? (
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
           <ActivityIndicator size="large" />
-        </View> :
+        </View>
+      ) : (
         <FlatList
           data={state.data}
           renderItem={renderItem}
           keyExtractor={(item) => item._id}
-        />}
+        />
+      )}
     </SafeAreaView>
   );
 };
@@ -114,4 +109,5 @@ const styles = StyleSheet.create({
     fontSize: 32,
   },
 });
-export default Home;
+
+export default ContentDetails;

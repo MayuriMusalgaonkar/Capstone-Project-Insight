@@ -4,6 +4,7 @@ import Home from '../components/Home';
 import { createAppContainer } from 'react-navigation';
 import SplashScreen from '../components/SplashScreen';
 import OnBoardingList from '../components/OnBoardingList';
+import ContentDetails from '../components/ContentDetails';
 
 const screens ={
 // SplashScreen:{
@@ -17,6 +18,9 @@ OnBoardingList:{
 },
 Home: {
     screen: Home
+},
+ContentDetails: {
+    screen: ContentDetails
 }
 
 } 
