@@ -1,123 +1,192 @@
 import React, { useEffect, useState } from "react";
 import {
-    StyleSheet,
-    Text,
-    SafeAreaView,
-    StatusBar,
-    FlatList,
-    View,
-    ActivityIndicator,
-    Image,
-    Pressable
-  } from "react-native";
-
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  StatusBar,
+  FlatList,
+  View,
+  ActivityIndicator,
+  Image,
+  Pressable,
+} from "react-native";
 
 const OnBoardingList = ({ navigation }) => {
-    console.log("OnBoarding List ");
-  
-    const [state, setState] = useState({ data: {}, status: "Idle", error: null });
-  
-    useEffect(() => {
-      console.log("UseEffect called");
-      getOnboardingList();
-    }, []);
-  
-    async function getOnboardingList() {
-        console.log("HERE")
-      setState({ ...state, status: "loading" });
-      await fetch("http://10.0.2.2:3000/recommended-articles")
-        .then((resp) => resp.json())
-        .then((responseJson) =>
+  console.log("OnBoarding List ");
+  let numColumns = 2;
+  const [state, setState] = useState({ data: {}, status: "Idle", error: null });
+
+  useEffect(() => {
+    console.log("UseEffect called");
+    getOnboardingList();
+  }, []);
+
+  async function getOnboardingList() {
+    console.log("HERE");
+    setState({ ...state, status: "loading" });
+    await fetch("http://10.0.2.2:3000/recommended-articles")
+      .then((resp) => resp.json())
+      .then((responseJson) =>
         setState({
           data: responseJson,
           status: "resolved",
           error: null,
         })
-        )
-        .catch((error) => setState({ data: {}, status: "error", error: error }));
-    }
-  
-    const renderItem = ({ item }) =>
-      item.category !== "" ? (
-        <View style={[styles.item,{flexDirection:'row',justifyContent:'space-around'}]}>
-          <Text style={styles.title}>{item.category}</Text>
-          <Image style={styles.img}
-          source={require( "../assets/images/javascript.jpg")}/>
-        </View>
-      ) : null;
-    return (
-      <SafeAreaView style={styles.container}>
-        {state.status === 'loading' ?
-          <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <ActivityIndicator size="large" />
-          </View> :
-          <FlatList
-            data={state.data}
-            renderItem={renderItem}
-            keyExtractor={(item) => item.id}
-          />}
-           <View style={styles.buttonView}>
-          <Pressable
-            style={styles.btn}
-            onPress={() => {
-              navigation.navigate("Home");
-            }}
-          >
-            <Text style={styles.doneBtn}>Done</Text>
-          </Pressable>
-        </View>
-      </SafeAreaView>
-    );
-  };
-  
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      paddingTop: StatusBar.currentHeight,
-    },
-    scrollView: {
-      backgroundColor: "pink",
-      marginHorizontal: 20,
-    },
-    text: {
-      fontSize: 42,
-    },
-    img:{
-      width:100,
-      height:100
-    },
-    item: {
-      backgroundColor: "#f9c2ff",
-      padding: 20,
-      marginVertical: 8,
-      marginHorizontal: 16,
-    },
-    title: {
-      fontSize: 32,
-    },
-    btn: {
-      textAlign: "center",
-      width: 200,
-      backgroundColor: "#0E39A9",
-      paddingHorizontal: 30,
-      paddingVertical: 18,
-      marginVertical:40,
-      marginLeft:105
-    },
-    // buttonView: {
-    //   flex: 1,
-    //   justifyContent: "center",
-    //   alignItems: "center",
-      
-    // },
-    doneBtn: {
-      fontSize: 20,
-      // fontWeight: 400,
-      lineHeight: 24,
-      letterSpacing: 0,
-      textAlign: "center",
-      color: "#ffffff",
-    },
-  });
+      )
+      .catch((error) => setState({ data: {}, status: "error", error: error }));
+  }
 
-  export default OnBoardingList;
+  const renderItem = ({ item }) =>
+    item.category !== "" ? (
+     
+      <View style={[styles.item]}>
+        <Text style={{ flex:1,textAlign:'center',color:'white',position:'absolute',
+        textTransform:'capitalize',left:45,fontSize:20,zIndex:999,top:45, justifyContent: "center", alignItems: "center" }}>{item.category}</Text>
+        
+        <Image
+          style={styles.overlay}
+          source={require("../assets/images/overlay.png")}
+        />
+         <Image
+          style={styles.img}
+          source={require("../assets/images/javascript.jpg")}
+        />
+        
+      </View>
+    ) : null;
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={{flex:1}}>
+        <Image
+          style={styles.logo}
+          source={require("../assets/images/interestLogo.png")}
+        />
+        <Text style={styles.heading}>Hit your Interests</Text>
+      </View>
+
+      { 
+      
+      state.status === "loading" ? (
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
+          <ActivityIndicator size="large" />
+        </View>
+      ) : (
+        <FlatList
+          numColumns={numColumns}
+          contentContainerStyle={styles.list}
+          data={state.data}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+        />
+      )}
+
+      
+      <View style={styles.buttonView}>
+        <Pressable
+          style={styles.btn}
+          onPress={() => {
+            navigation.navigate("Home");
+          }}
+        >
+          <Text style={styles.doneBtn}>Done</Text>
+        </Pressable>
+      </View>
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // paddingTop: StatusBar.currentHeight,
+    backgroundColor: "#ffffff",
+  },
+  // scrollView: {
+  //   backgroundColor: "pink",
+  //   marginHorizontal: 20,
+  // },
+  heading: {
+    position: "absolute",
+    fontSize: 30,
+    color: "#1974D2",
+    marginHorizontal: "20%",
+    // left: 60,
+    // top: 10,
+  },
+  logo: {
+    marginTop: -20,
+    marginHorizontal: 20,
+    paddingHorizontal: 20,
+  },
+
+  overlay:{
+      position: "absolute",
+      marginHorizontal: "3%",
+      top:45,
+      zIndex:2,
+      width:'95%',
+      height:35,
+      alignItems:'center',
+      opacity:0.8,
+      justifyContent: 'center'
+    },
+
+ 
+  // title: {
+  //   position:'absolute',
+  //   top:'100%',
+  //   justifyContent: 'center',
+  //   // width:'100%',
+  //   fontSize: 20,
+  //  color:'#fffff',
+
+  // },
+  list: {
+    marginTop: 50,
+    marginHorizontal:15
+  },
+  img: {
+    maxWidth: '100%',
+    height:140,
+    zIndex:1,
+    // justifyContent:'center'
+
+  },
+  item: {
+    flex:1,
+     margin: 10,
+    //  flexDirection:'row',
+    // flexWrap:'wrap',
+  },
+  title: {
+    fontSize: 32,
+  },
+  btn: {
+    textAlign: "center",
+    width: 200,
+    backgroundColor: "#0E39A9",
+    paddingHorizontal: 30,
+    paddingVertical: 18,
+    marginVertical: 30,
+     marginLeft: 105,
+  },
+
+  buttonView: {
+    // position:'fixed'
+    // justifyContent: "center",
+    // alignItems: "center",
+
+  },
+  doneBtn: {
+    fontSize: 20,
+    // fontWeight: 400,
+    lineHeight: 24,
+    letterSpacing: 0,
+    textAlign: "center",
+    color: "#ffffff",
+  },
+});
+
+export default OnBoardingList;
