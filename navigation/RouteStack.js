@@ -1,16 +1,12 @@
-import Login from '../components/Login';
-import { createStackNavigator } from 'react-navigation-stack';
-import Home from '../components/Home';
-import { createAppContainer } from 'react-navigation';
-import SplashScreen from '../components/SplashScreen';
 import OnBoardingList from '../components/OnBoardingList';
 import ContentDetails from '../components/ContentDetails';
 import TabNavigator from './TabNavigator';
+import Login from '../components/LoginScreen';
+
+import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer } from 'react-navigation';
 
 const screens ={
-// SplashScreen:{
-//     screen: SplashScreen
-// },
 Login: {
     screen: Login
 },

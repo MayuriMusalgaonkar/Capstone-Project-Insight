@@ -6,10 +6,13 @@ import {
   StatusBar,
   FlatList,
   View,
-  ActivityIndicator
+  ActivityIndicator,
+  Dimensions,
+  Image
 } from "react-native";
+const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
 
-const Home = ({navigation, route}) => {
+const Home = ({ navigation, route }) => {
   console.log("Article List ");
 
   const [state, setState] = useState({ data: {}, status: "Idle", error: null });
@@ -67,15 +70,58 @@ const Home = ({navigation, route}) => {
 
   const renderItem = ({ item }) =>
     item.title !== "" ? (
-      <View style={styles.item}>
-        <Text onPress={() => {
-              navigation.navigate('ContentDetails',{
-                itemId: item._id
-              });
-            }} style={styles.title}>{item.title}</Text>
+      // <View style={styles.item}>
+      //   <Text onPress={() => {
+      //         navigation.navigate('ContentDetails',{
+      //           itemId: item._id
+      //         });
+      //       }} style={styles.title}>{item.title}</Text>
+      // </View>
+      <View style={styles.mainCardView} onPress={() => {
+        navigation.navigate('ContentDetails', {
+          itemId: item._id
+        })
+      }} >
+        <View style={{ flexDirection: 'row', padding: 10, alignItems: "center" }} >
+          <View>
+            <Image
+              source={require("../assets/images/ProfilePicture.png")}
+              resizeMode="contain"
+              style={{
+                borderRadius: 25, height: 40, width: 40,
+              }}
+            />
+          </View>
+          <View style={{ marginLeft: 12, wordWrap: "break-all", width: "85%" }}>
+            <Text
+              style={{
+                fontSize: 14, color: "black", fontWeight: 'bold', textTransform: 'capitalize',
+              }}>
+              {'Full Name | And detailed information'}
+            </Text>
+          </View>
+        </View>
+        <View style={{ flexDirection: 'row', justifyContent: "center", marginBottom: 50,  width: "100%"}} >
+          <View style={{ marginLeft: 25, wordWrap: "break-all", width: "70%"}}>
+            <Text
+              style={{
+                fontSize: 14, color: "black", fontWeight: 'bold', textTransform: 'capitalize',
+              }}>
+              {item.title}
+            </Text>
+          </View>
+          <View style={{width: "30%"}}>
+            <Image
+              source={require("../assets/images/ArticleImage.png")}
+              resizeMode="contain"
+              style={{
+                height: 70, width: 100,
+              }}
+            />
+          </View>
+        </View>
       </View>
     ) : null;
-
 
   return (
     <SafeAreaView style={styles.container}>
@@ -112,6 +158,16 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
+  },
+  mainCardView: {
+    height: 160,
+    justifyContent: 'center',
+    backgroundColor: "white",
+    shadowColor: "shadow",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 1,
+    elevation: 8,
+    justifyContent: 'space-between',
   },
 });
 export default Home;
