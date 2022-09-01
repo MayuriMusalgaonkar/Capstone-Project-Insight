@@ -12,17 +12,14 @@ import {
 } from "react-native";
 
 const OnBoardingList = ({ navigation }) => {
-  console.log("OnBoarding List ");
   let numColumns = 2;
   const [state, setState] = useState({ data: {}, status: "Idle", error: null });
 
   useEffect(() => {
-    console.log("UseEffect called");
     getOnboardingList();
   }, []);
 
   async function getOnboardingList() {
-    console.log("HERE");
     setState({ ...state, status: "loading" });
     await fetch("http://10.0.2.2:3000/recommended-articles")
       .then((resp) => resp.json())
@@ -113,10 +110,10 @@ const styles = StyleSheet.create({
     color: "#1974D2",
     marginHorizontal: "20%",
     // left: 60,
-    // top: 10,
+    top: 55,
   },
   logo: {
-    marginTop: -20,
+    marginTop: 40,
     marginHorizontal: 20,
     paddingHorizontal: 20,
   },
@@ -144,7 +141,7 @@ const styles = StyleSheet.create({
 
   // },
   list: {
-    marginTop: 50,
+    marginTop: '30%',
     marginHorizontal:15
   },
   img: {
@@ -169,8 +166,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#0E39A9",
     paddingHorizontal: 30,
     paddingVertical: 18,
-    marginVertical: 30,
+    marginBottom: 50,
      marginLeft: 105,
+     marginTop:30
   },
 
   buttonView: {
