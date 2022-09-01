@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   },
   listTab: {
     flex: 1,
-    paddingTop: 60,
+    paddingTop: 110,
     flexDirection: "row",
     marginLeft: 20,
   },
