@@ -9,9 +9,9 @@ import {
   ActivityIndicator,
 } from "react-native";
 
-const ContentDetails = ({ navigation }) => {
-  const itemId = navigation.getParam("itemId");
-  console.log(itemId);
+const ContentDetails = ({ navigation, route }) => {
+  // const itemId = navigation.getParam("itemId");
+  // console.log(itemId);
 
   const [state, setState] = useState({ data: {}, status: "Idle", error: null });
 
@@ -61,12 +61,12 @@ const ContentDetails = ({ navigation }) => {
       .catch((error) => setState({ data: {}, status: "error", error: error }));
   }
 
-  const renderItem = ({ item }) =>
-    item.title !== "" ? (
-      <View style={styles.item}>
-        <Text style={styles.title}>{item.title}</Text>
-      </View>
-    ) : null;
+  // const renderItem = ({ item }) =>
+  //   item.title !== "" ? (
+  //     <View style={styles.item}>
+  //       <Text style={styles.title}>{item.title}</Text>
+  //     </View>
+  //   ) : null;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -77,11 +77,9 @@ const ContentDetails = ({ navigation }) => {
           <ActivityIndicator size="large" />
         </View>
       ) : (
-        <FlatList
-          data={state.data}
-          renderItem={renderItem}
-          keyExtractor={(item) => item._id}
-        />
+        <View>
+          <Text>{route.params?.itemId}</Text>
+        </View>
       )}
     </SafeAreaView>
   );

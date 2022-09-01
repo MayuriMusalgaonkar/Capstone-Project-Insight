@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     flex: 2,
     justifyContent: "center",
     alignItems: "center",
-    top: -20,
+    top: 30,
   },
   logo: {
     // paddingBottom: 20,
