@@ -41,9 +41,9 @@ const Navigator = () => {
         <Stack.Screen
           name="ContentDetails"
           component={ContentDetailsScreen}
-          // options={{  
-          //   headerShown: false,  
-          // }}   
+          options={{  
+            headerShown: false,  
+          }}   
         />
         
         <Stack.Screen name="Profile" 

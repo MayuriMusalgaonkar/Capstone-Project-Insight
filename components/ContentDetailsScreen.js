@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
   ScrollView
 } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const ContentDetails = ({ navigation, route }) => {
   // const itemId = navigation.getParam("itemId");
@@ -72,6 +73,21 @@ const ContentDetails = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
+      <TouchableOpacity
+      style={{marginLeft:20}}
+      onPress={()=>{
+        navigation.goBack()
+      }
+       }
+      >
+        <Image 
+        source={require("../assets/images/back.png")}
+        
+        
+        >
+
+        </Image>
+      </TouchableOpacity>
       {state.status === "loading" ? (
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
@@ -82,17 +98,18 @@ const ContentDetails = ({ navigation, route }) => {
         // <View>
         //   <Text>{route.params?.itemId}</Text>
         // </View> 
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1,marginTop:50 }}>
           <View>
             <Image
               source={require("../assets/images/bookmark1.png")}
               resizeMode="contain"
               style={{
-                height: 50, width: 50, position: "absolute", right: 20, top:-30,
+                height: 50, width: 50, position: "absolute", right: 20, top:-50,
               }}
             />
           </View>
           <ScrollView>
+            <View style={{marginHorizontal:15}}>
             <View style={{ flexDirection: 'row', padding: 10, alignItems: "center" }} >
 
               <View>
@@ -118,11 +135,11 @@ const ContentDetails = ({ navigation, route }) => {
                 {route.params?.itemHeading}
               </Text>
             </View>
-            <View>
+            <View style={{width:'100%',justifyContent: 'center',alignItems:'center'}}>
               <Image
                 source={require("../assets/images/ArticleContentImage.png")}
                 resizeMode="contain"
-                style={{ margin: 15 }}
+                style={{ position:'relative',width:'92%',}}
               />
             </View>
             <View>
@@ -132,6 +149,7 @@ const ContentDetails = ({ navigation, route }) => {
               <Text style={styles.text}>
                 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
               </Text>
+            </View>
             </View>
           </ScrollView>
         </View>
