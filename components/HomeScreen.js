@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   ScrollView
 } from "react-native";
+
 const { width } = Dimensions.get('window');
 
 const Home = ({ navigation, route }) => {
@@ -87,7 +88,8 @@ const Home = ({ navigation, route }) => {
       // </View>
       <View style={styles.mainCardView} onStartShouldSetResponder={() => {
         navigation.navigate('ContentDetails', {
-          itemId: item._id
+          itemId: item._id,
+          itemHeading: item.title
         })
       }} >
         <View style={{ flexDirection: 'row', padding: 10, alignItems: "center" }} >
@@ -140,8 +142,6 @@ const Home = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-
-
       {state.status === 'loading' ?
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <ActivityIndicator size="large" />
