@@ -223,7 +223,6 @@ const styles = StyleSheet.create({
   },
   signInBtn: {
     fontSize: 20,
-    // fontWeight: 400,
     lineHeight: 24,
     letterSpacing: 0,
     textAlign: "center",

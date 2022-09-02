@@ -6,7 +6,9 @@ import {
   StatusBar,
   FlatList,
   View,
+  Image,
   ActivityIndicator,
+  ScrollView
 } from "react-native";
 
 const ContentDetails = ({ navigation, route }) => {
@@ -17,7 +19,7 @@ const ContentDetails = ({ navigation, route }) => {
 
   useEffect(() => {
     console.log("UseEffect called");
-    getContentDetails();
+    // getContentDetails();
   }, []);
 
   async function getContentDetails(props) {
@@ -51,7 +53,7 @@ const ContentDetails = ({ navigation, route }) => {
     )
       .then((resp) => resp.json())
       .then(
-        (responseJson) => 
+        (responseJson) =>
           setState({
             data: responseJson.documents,
             status: "resolved",
@@ -77,8 +79,61 @@ const ContentDetails = ({ navigation, route }) => {
           <ActivityIndicator size="large" />
         </View>
       ) : (
-        <View>
-          <Text>{route.params?.itemId}</Text>
+        // <View>
+        //   <Text>{route.params?.itemId}</Text>
+        // </View> 
+        <View style={{ flex: 1 }}>
+          <View>
+            <Image
+              source={require("../assets/images/bookmark1.png")}
+              resizeMode="contain"
+              style={{
+                height: 50, width: 50, position: "absolute", right: 20, top:-30,
+              }}
+            />
+          </View>
+          <ScrollView>
+            <View style={{ flexDirection: 'row', padding: 10, alignItems: "center" }} >
+
+              <View>
+                <Image
+                  source={require("../assets/images/ProfilePicture.png")}
+                  resizeMode="contain"
+                  style={{
+                    borderRadius: 25, height: 40, width: 40,
+                  }}
+                />
+              </View>
+              <View style={{ marginLeft: 12, wordWrap: "break-all", width: "85%" }}>
+                <Text
+                  style={{
+                    fontSize: 14, color: "black", fontWeight: 'bold', textTransform: 'capitalize',
+                  }}>
+                  {'Full Name | And detailed information'}
+                </Text>
+              </View>
+            </View>
+            <View>
+              <Text style={styles.title}>
+                {route.params?.itemHeading}
+              </Text>
+            </View>
+            <View>
+              <Image
+                source={require("../assets/images/ArticleContentImage.png")}
+                resizeMode="contain"
+                style={{ margin: 15 }}
+              />
+            </View>
+            <View>
+              <Text style={styles.text}>
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              </Text>
+              <Text style={styles.text}>
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              </Text>
+            </View>
+          </ScrollView>
         </View>
       )}
     </SafeAreaView>
@@ -89,13 +144,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight,
-  },
-  scrollView: {
-    backgroundColor: "pink",
-    marginHorizontal: 20,
-  },
-  text: {
-    fontSize: 42,
+    backgroundColor: "#ffffff"
   },
   item: {
     backgroundColor: "#f9c2ff",
@@ -104,7 +153,14 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   title: {
-    fontSize: 32,
+    fontSize: 20,
+    textAlign: "left",
+    marginLeft: 12,
+  },
+  text: {
+    fontSize: 20,
+    textAlign: "justify",
+    margin: 15,
   },
 });
 
