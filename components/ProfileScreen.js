@@ -29,14 +29,14 @@ const Profile = () => {
             borderRadius: 25, height: 100, width: 100,
           }}
         />
-        <Text style={{ fontSize: 20, padding: 10 }}>
+        <Text style={{ fontSize: 20, paddingVertical: 10 }}>
           Full name
         </Text>
-        <Text style={{ padding: 10 }}>
+        <Text style={{ fontSize: 15 }}>
           And detailed information
         </Text>
       </View>
-      <View style={{ flex: 2, justifyContent: "center" }}>
+      <View style={{ flex: 2, justifyContent: "center",marginTop:-10 }}>
         <View style={styles.buttonView}>
           <Pressable style={styles.btn} >
             <Text style={styles.signInBtn}>Edit Profile</Text>
@@ -67,13 +67,15 @@ const Profile = () => {
             style={styles.title}>
             {"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."}
           </Text>
+          <View style={{alignItems:'center',justifyContent:'center',
+              width:'100%'
+            }}>
           <Image
             source={require("../assets/images/ProfileImage.png")}
             resizeMode="contain"
-            style={{
-              margin: 15
-            }}
+            style={{width:'90%'}}
           />
+          </View>
         </View>
       </View>
 
@@ -91,10 +93,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    marginTop:-25
 
   },
   signInBtn: {
-    fontSize: 20,
+    fontSize: 18,
     lineHeight: 24,
     letterSpacing: 0,
     textAlign: "center",
@@ -106,24 +109,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingVertical: 18,
     borderRadius: 42,
-    width: "90%"
+    width: "90%",
+    marginTop:-30
   },
   listTab: {
     flexDirection: "row",
-    marginTop: 10,
-    marginLeft: 20,
+    marginTop: -30,
     marginBottom: 30,
-    marginRight: 20,
     justifyContent: "center",
     alignContent: "center"
 
   },
   btnTab: {
-    flexDirection: "row",
-    justifyContent: "center",
     backgroundColor: "#ffffff",
     borderRadius: 42,
-    marginRight: 10,
+    marginLeft: 15,
     borderColor: "#1974D2",
     borderWidth: 1,
   },
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
   },
   textTabActive: {
     color: "#ffffff",
-    fontSize: 24,
+    fontSize: 21,
     borderRadius: 20,
     marginRight: 10,
     textAlign: "center",
@@ -140,16 +140,16 @@ const styles = StyleSheet.create({
     marginLeft: 5
   },
   textTab: {
-    fontSize: 21,
+    fontSize: 18,
     color: "#1974D2",
-    textAlign: "center",
-    padding: 15,
+    paddingVertical: 15,
+    paddingHorizontal:25
   },
   title: {
-    fontSize: 15,
+    fontSize: 20,
     textAlign: "left",
-    marginLeft: 12,
-    wordWrap: "break-all",
+    marginBottom: 12,
+    marginHorizontal:20
   },
 });
 

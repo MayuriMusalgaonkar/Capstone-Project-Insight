@@ -46,7 +46,7 @@ const OnBoardingList = ({ navigation }) => {
         />
          <Image
           style={styles.img}
-          source={require("../assets/images/javascript.jpg")}
+          source={require("../assets/images/onboarding1.png")}
         />
         
       </View>

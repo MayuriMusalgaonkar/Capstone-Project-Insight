@@ -13,7 +13,7 @@ import {
   ScrollView
 } from "react-native";
 
-const { width } = Dimensions.get('window');
+const DimensionsWindowWidth = Dimensions.get("window").width;
 
 const Home = ({ navigation, route }) => {
   console.log("Article List ");
@@ -86,7 +86,7 @@ const Home = ({ navigation, route }) => {
       //         });
       //       }} style={styles.title}>{item.title}</Text>
       // </View>
-      <View style={styles.mainCardView} onStartShouldSetResponder={() => {
+      <TouchableOpacity style={styles.mainCardView} onPress={() => {
         navigation.navigate('ContentDetails', {
           itemId: item._id,
           itemHeading: item.title
@@ -102,7 +102,7 @@ const Home = ({ navigation, route }) => {
               }}
             />
           </View>
-          <View style={{ marginLeft: 12, wordWrap: "break-all", width: "85%" }}>
+          <View style={{ marginLeft: 12, wordWrap: "wrap", width: "85%" }}>
             <Text
               style={{
                 fontSize: 14, color: "black", fontWeight: 'bold', textTransform: 'capitalize',
@@ -130,15 +130,8 @@ const Home = ({ navigation, route }) => {
             />
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     ) : null;
-
-  // const [contentWidth, setContentWidth] = React.useState(width)
-
-  // const onContentSizeChange = (contentWidth) => {
-  //   setContentWidth(contentWidth);
-  // };
-  // const scrollEnabled = contentWidth > width;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -153,12 +146,11 @@ const Home = ({ navigation, route }) => {
               source={require("../assets/images/Home.png")}
             />
           </View>
-          {/* <ScrollView 
-        style={{ width: "100%", overflow: "scroll" }}
-        contentContainerStyle={styles.scrollview}
-        scrollEnabled={scrollEnabled}
-        onContentSizeChange={onContentSizeChange}
-        > */}
+          <ScrollView 
+        style={styles.scrollView}
+        horizontal= {true}
+        showsHorizontalScrollIndicator={false}
+        >
           <View style={styles.listTab}>
             {listTab.map((tab, index) => (
               <TouchableOpacity
@@ -179,8 +171,9 @@ const Home = ({ navigation, route }) => {
               </TouchableOpacity>
             ))}
           </View>
-          {/* </ScrollView> */}
+          </ScrollView>
           <FlatList
+          contentContainerStyle={{flexGrow: 1, marginHorizontal: 20,justifyContent: 'center'}}
             data={state.data}
             renderItem={renderItem}
             keyExtractor={(item) => item._id}
@@ -207,7 +200,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f9c2ff",
     padding: 20,
     marginVertical: 8,
-    marginHorizontal: 16,
+    marginHorizontal: 20,
   },
   title: {
     fontSize: 32,
@@ -223,18 +216,21 @@ const styles = StyleSheet.create({
   },
   textTabActive: {
     color: "#ffffff",
-    fontSize: 24,
+    fontSize: 21,
     borderRadius: 20,
     marginRight: 10,
     textAlign: "center",
-    padding: 15,
+    paddingHorizontal:20,
+    paddingVertical:12,
     marginLeft: 5
   },
   textTab: {
-    fontSize: 21,
+    fontSize: 18,
     color: "#1974D2",
     textAlign: "center",
-    padding: 15,
+    paddingHorizontal:20,
+    paddingVertical:12,
+    alignItems:'center'
   },
   btnTabActive: {
     backgroundColor: "#1974D2",
@@ -244,7 +240,10 @@ const styles = StyleSheet.create({
     marginTop: 100,
     marginLeft: 20,
     marginBottom: 30,
-    marginRight: 20
+    marginRight: 20,
+    // padding: 10,
+        // width: DimensionsWindowWidth,
+        // height: "100%"
 
   },
   btnTab: {
@@ -261,6 +260,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     paddingHorizontal: 20,
   },
+  scrollView: {
+    // position: "absolute",
+    width: "100%",
+    height: "36%"
+},
 });
 
 export default Home;
