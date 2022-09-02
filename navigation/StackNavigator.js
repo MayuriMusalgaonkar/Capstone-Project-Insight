@@ -33,7 +33,10 @@ const Navigator = () => {
         <Stack.Screen
           name="Home"
           component={TabNavigator}
-          options={{ title: 'Home' }}
+          // options={{ title: 'Home' }}
+          options={{  
+            headerShown: false,  
+          }}  
         />
         <Stack.Screen
           name="ContentDetails"
