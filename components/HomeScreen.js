@@ -8,14 +8,22 @@ import {
   View,
   ActivityIndicator,
   Dimensions,
-  Image
+  Image,
+  TouchableOpacity,
+  ScrollView
 } from "react-native";
-const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 const Home = ({ navigation, route }) => {
   console.log("Article List ");
 
   const [state, setState] = useState({ data: {}, status: "Idle", error: null });
+  const listTab = ["Your Interests", "Politics", "Entertainment"];
+  const [list, setList] = React.useState("Your Interests");
+
+  const setListFilter = (list) => {
+    setList(list);
+  };
 
   useEffect(() => {
     console.log("UseEffect called");
@@ -77,7 +85,7 @@ const Home = ({ navigation, route }) => {
       //         });
       //       }} style={styles.title}>{item.title}</Text>
       // </View>
-      <View style={styles.mainCardView} onPress={() => {
+      <View style={styles.mainCardView} onStartShouldSetResponder={() => {
         navigation.navigate('ContentDetails', {
           itemId: item._id
         })
@@ -101,8 +109,8 @@ const Home = ({ navigation, route }) => {
             </Text>
           </View>
         </View>
-        <View style={{ flexDirection: 'row', justifyContent: "center", marginBottom: 50,  width: "100%"}} >
-          <View style={{ marginLeft: 25, wordWrap: "break-all", width: "70%"}}>
+        <View style={{ flexDirection: 'row', justifyContent: "center", marginBottom: 50, width: "100%" }} >
+          <View style={{ marginLeft: 25, wordWrap: "break-all", width: "70%" }}>
             <Text
               style={{
                 fontSize: 14, color: "black", fontWeight: 'bold', textTransform: 'capitalize',
@@ -110,7 +118,7 @@ const Home = ({ navigation, route }) => {
               {item.title}
             </Text>
           </View>
-          <View style={{width: "30%"}}>
+          <View style={{ width: "30%" }}>
             <Image
               source={require("../assets/images/ArticleImage.png")}
               resizeMode="contain"
@@ -123,17 +131,61 @@ const Home = ({ navigation, route }) => {
       </View>
     ) : null;
 
+  // const [contentWidth, setContentWidth] = React.useState(width)
+
+  // const onContentSizeChange = (contentWidth) => {
+  //   setContentWidth(contentWidth);
+  // };
+  // const scrollEnabled = contentWidth > width;
+
   return (
     <SafeAreaView style={styles.container}>
+
+
       {state.status === 'loading' ?
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <ActivityIndicator size="large" />
         </View> :
-        <FlatList
-          data={state.data}
-          renderItem={renderItem}
-          keyExtractor={(item) => item._id}
-        />}
+        <>
+          <View style={{ flex: 1 }}>
+            <Image
+              style={styles.logo}
+              source={require("../assets/images/Home.png")}
+            />
+          </View>
+          {/* <ScrollView 
+        style={{ width: "100%", overflow: "scroll" }}
+        contentContainerStyle={styles.scrollview}
+        scrollEnabled={scrollEnabled}
+        onContentSizeChange={onContentSizeChange}
+        > */}
+          <View style={styles.listTab}>
+            {listTab.map((tab, index) => (
+              <TouchableOpacity
+                style={[
+                  styles.btnTab,
+                  list === tab && styles.btnTabActive,
+                ]}
+                key={index}
+                onPress={() => setListFilter(tab)}
+              >
+                <Text
+                  style={
+                    list === tab ? styles.textTabActive : styles.textTab
+                  }
+                >
+                  {tab}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+          {/* </ScrollView> */}
+          <FlatList
+            data={state.data}
+            renderItem={renderItem}
+            keyExtractor={(item) => item._id}
+          />
+        </>}
     </SafeAreaView>
   );
 };
@@ -142,6 +194,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight,
+    backgroundColor: "#ffffff"
   },
   scrollView: {
     backgroundColor: "pink",
@@ -161,7 +214,6 @@ const styles = StyleSheet.create({
   },
   mainCardView: {
     height: 160,
-    justifyContent: 'center',
     backgroundColor: "white",
     shadowColor: "shadow",
     shadowOffset: { width: 0, height: 0 },
@@ -169,5 +221,46 @@ const styles = StyleSheet.create({
     elevation: 8,
     justifyContent: 'space-between',
   },
+  textTabActive: {
+    color: "#ffffff",
+    fontSize: 24,
+    borderRadius: 20,
+    marginRight: 10,
+    textAlign: "center",
+    padding: 15,
+    marginLeft: 5
+  },
+  textTab: {
+    fontSize: 21,
+    color: "#1974D2",
+    textAlign: "center",
+    padding: 15,
+  },
+  btnTabActive: {
+    backgroundColor: "#1974D2",
+  },
+  listTab: {
+    flexDirection: "row",
+    marginTop: 100,
+    marginLeft: 20,
+    marginBottom: 30,
+    marginRight: 20
+
+  },
+  btnTab: {
+    flexDirection: "row",
+    justifyContent: "center",
+    backgroundColor: "#ffffff",
+    borderRadius: 42,
+    marginRight: 10,
+    borderColor: "#1974D2",
+    borderWidth: 1,
+  },
+  logo: {
+    marginTop: 10,
+    marginHorizontal: 20,
+    paddingHorizontal: 20,
+  },
 });
+
 export default Home;
