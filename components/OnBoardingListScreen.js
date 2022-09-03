@@ -15,8 +15,12 @@ const OnBoardingList = ({ navigation }) => {
   let numColumns = 2;
   const [state, setState] = useState({ data: {}, status: "Idle", error: null });
 
+  //clean the state in the unmount to avoid warning: Can't perform a React state update on an unmounted component
   useEffect(() => {
     getOnboardingList();
+    return () => {
+      setState({});
+    };
   }, []);
 
   async function getOnboardingList() {
@@ -35,25 +39,38 @@ const OnBoardingList = ({ navigation }) => {
 
   const renderItem = ({ item }) =>
     item.category !== "" ? (
-     
       <View style={[styles.item]}>
-        <Text style={{ flex:1,textAlign:'center',color:'white',position:'absolute',
-        textTransform:'capitalize',left:45,fontSize:20,zIndex:999,top:45, justifyContent: "center", alignItems: "center" }}>{item.category}</Text>
-        
+        <Text
+          style={{
+            flex: 1,
+            textAlign: "center",
+            color: "white",
+            position: "absolute",
+            textTransform: "capitalize",
+            left: 45,
+            fontSize: 20,
+            zIndex: 999,
+            top: 45,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          {item.category}
+        </Text>
+
         <Image
           style={styles.overlay}
           source={require("../assets/images/overlay.png")}
         />
-         <Image
+        <Image
           style={styles.img}
           source={require("../assets/images/onboarding1.png")}
         />
-        
       </View>
     ) : null;
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{flex:1}}>
+      <View style={{ flex: 1 }}>
         <Image
           style={styles.logo}
           source={require("../assets/images/interestLogo.png")}
@@ -61,9 +78,7 @@ const OnBoardingList = ({ navigation }) => {
         <Text style={styles.heading}>Hit your Interests</Text>
       </View>
 
-      { 
-      
-      state.status === "loading" ? (
+      {state.status === "loading" ? (
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
@@ -79,7 +94,6 @@ const OnBoardingList = ({ navigation }) => {
         />
       )}
 
-      
       <View style={styles.buttonView}>
         <Pressable
           style={styles.btn}
@@ -118,19 +132,18 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
 
-  overlay:{
-      position: "absolute",
-      marginHorizontal: "3%",
-      top:45,
-      zIndex:2,
-      width:'95%',
-      height:35,
-      alignItems:'center',
-      opacity:0.8,
-      justifyContent: 'center'
-    },
+  overlay: {
+    position: "absolute",
+    marginHorizontal: "3%",
+    top: 45,
+    zIndex: 2,
+    width: "95%",
+    height: 35,
+    alignItems: "center",
+    opacity: 0.8,
+    justifyContent: "center",
+  },
 
- 
   // title: {
   //   position:'absolute',
   //   top:'100%',
@@ -141,19 +154,18 @@ const styles = StyleSheet.create({
 
   // },
   list: {
-    marginTop: '30%',
-    marginHorizontal:15
+    marginTop: "30%",
+    marginHorizontal: 15,
   },
   img: {
-    maxWidth: '100%',
-    height:140,
-    zIndex:1,
+    maxWidth: "100%",
+    height: 140,
+    zIndex: 1,
     // justifyContent:'center'
-
   },
   item: {
-    flex:1,
-     margin: 10,
+    flex: 1,
+    margin: 10,
     //  flexDirection:'row',
     // flexWrap:'wrap',
   },
@@ -167,15 +179,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     paddingVertical: 18,
     marginBottom: 50,
-     marginLeft: 105,
-     marginTop:30
+    marginLeft: 105,
+    marginTop: 30,
   },
 
   buttonView: {
     // position:'fixed'
     // justifyContent: "center",
     // alignItems: "center",
-
   },
   doneBtn: {
     fontSize: 20,
