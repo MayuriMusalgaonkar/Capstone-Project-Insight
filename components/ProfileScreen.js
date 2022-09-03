@@ -7,9 +7,8 @@ import {
   StyleSheet,
   StatusBar,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
-
 
 const Profile = () => {
   const listTab = ["Public", "Unlisted"];
@@ -26,36 +25,29 @@ const Profile = () => {
           source={require("../assets/images/ProfilePagePicture.png")}
           resizeMode="contain"
           style={{
-            borderRadius: 25, height: 100, width: 100,
+            borderRadius: 25,
+            height: 100,
+            width: 100,
           }}
         />
-        <Text style={{ fontSize: 20, paddingVertical: 10 }}>
-          Full name
-        </Text>
-        <Text style={{ fontSize: 15 }}>
-          And detailed information
-        </Text>
+        <Text style={{ fontSize: 20, paddingVertical: 10 }}>Full name</Text>
+        <Text style={{ fontSize: 15 }}>And detailed information</Text>
       </View>
-      <View style={{ flex: 2, justifyContent: "center",marginTop:-10 }}>
+      <View style={{ flex: 2, justifyContent: "center", marginTop: -10 }}>
         <View style={styles.buttonView}>
-          <Pressable style={styles.btn} >
+          <Pressable style={styles.btn}>
             <Text style={styles.signInBtn}>Edit Profile</Text>
           </Pressable>
         </View>
         <View style={styles.listTab}>
           {listTab.map((tab, index) => (
             <TouchableOpacity
-              style={[
-                styles.btnTab,
-                list === tab && styles.btnTabActive,
-              ]}
+              style={[styles.btnTab, list === tab && styles.btnTabActive]}
               key={index}
               onPress={() => setListFilter(tab)}
             >
               <Text
-                style={
-                  list === tab ? styles.textTabActive : styles.textTab
-                }
+                style={list === tab ? styles.textTabActive : styles.textTab}
               >
                 {tab}
               </Text>
@@ -63,38 +55,41 @@ const Profile = () => {
           ))}
         </View>
         <View>
-          <Text
-            style={styles.title}>
-            {"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."}
+          <Text style={styles.title}>
+            {
+              "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+            }
           </Text>
-          <View style={{alignItems:'center',justifyContent:'center',
-              width:'100%'
-            }}>
-          <Image
-            source={require("../assets/images/ProfileImage.png")}
-            resizeMode="contain"
-            style={{width:'90%'}}
-          />
+          <View
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+            }}
+          >
+            <Image
+              source={require("../assets/images/ProfileImage.png")}
+              resizeMode="contain"
+              style={{ width: "90%" }}
+            />
           </View>
         </View>
       </View>
-
     </SafeAreaView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight,
-    backgroundColor: "#ffffff"
+    backgroundColor: "#ffffff",
   },
   buttonView: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginTop:-25
-
+    marginTop: -25,
   },
   signInBtn: {
     fontSize: 18,
@@ -110,15 +105,14 @@ const styles = StyleSheet.create({
     paddingVertical: 18,
     borderRadius: 42,
     width: "90%",
-    marginTop:-30
+    marginTop: -30,
   },
   listTab: {
     flexDirection: "row",
     marginTop: -30,
     marginBottom: 30,
     justifyContent: "center",
-    alignContent: "center"
-
+    alignContent: "center",
   },
   btnTab: {
     backgroundColor: "#ffffff",
@@ -137,20 +131,20 @@ const styles = StyleSheet.create({
     marginRight: 10,
     textAlign: "center",
     padding: 15,
-    marginLeft: 5
+    marginLeft: 5,
   },
   textTab: {
     fontSize: 18,
     color: "#1974D2",
     paddingVertical: 15,
-    paddingHorizontal:25
+    paddingHorizontal: 25,
   },
   title: {
     fontSize: 20,
     textAlign: "left",
     marginBottom: 12,
-    marginHorizontal:20
+    marginHorizontal: 20,
   },
 });
 
-export default Profile
+export default Profile;

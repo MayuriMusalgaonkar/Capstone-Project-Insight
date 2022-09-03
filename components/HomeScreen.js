@@ -10,7 +10,7 @@ import {
   Dimensions,
   Image,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
 } from "react-native";
 
 const DimensionsWindowWidth = Dimensions.get("window").width;
@@ -86,37 +86,59 @@ const Home = ({ navigation, route }) => {
       //         });
       //       }} style={styles.title}>{item.title}</Text>
       // </View>
-      <TouchableOpacity style={styles.mainCardView} onPress={() => {
-        navigation.navigate('ContentDetails', {
-          itemId: item._id,
-          itemHeading: item.title
-        })
-      }} >
-        <View style={{ flexDirection: 'row', padding: 10, alignItems: "center" }} >
+      <TouchableOpacity
+        style={styles.mainCardView}
+        onPress={() => {
+          navigation.navigate("ContentDetails", {
+            itemId: item._id,
+            itemHeading: item.title,
+          });
+        }}
+      >
+        <View
+          style={{ flexDirection: "row", padding: 10, alignItems: "center" }}
+        >
           <View>
             <Image
               source={require("../assets/images/ProfilePicture.png")}
               resizeMode="contain"
               style={{
-                borderRadius: 25, height: 40, width: 40,
+                borderRadius: 25,
+                height: 40,
+                width: 40,
               }}
             />
           </View>
           <View style={{ marginLeft: 12, wordWrap: "wrap", width: "85%" }}>
             <Text
               style={{
-                fontSize: 14, color: "black", fontWeight: 'bold', textTransform: 'capitalize',
-              }}>
-              {'Full Name | And detailed information'}
+                fontSize: 14,
+                color: "black",
+                fontWeight: "bold",
+                textTransform: "capitalize",
+              }}
+            >
+              {"Full Name | And detailed information"}
             </Text>
           </View>
         </View>
-        <View style={{ flexDirection: 'row', justifyContent: "center", marginBottom: 50, width: "100%" }} >
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            marginBottom: 50,
+            width: "100%",
+          }}
+        >
           <View style={{ marginLeft: 25, wordWrap: "break-all", width: "70%" }}>
             <Text
               style={{
-                fontSize: 14, color: "black", fontWeight: 'bold', textTransform: 'capitalize',
-              }}>
+                fontSize: 14,
+                color: "black",
+                fontWeight: "bold",
+                textTransform: "capitalize",
+              }}
+            >
               {item.title}
             </Text>
           </View>
@@ -125,7 +147,8 @@ const Home = ({ navigation, route }) => {
               source={require("../assets/images/ArticleImage.png")}
               resizeMode="contain"
               style={{
-                height: 70, width: 100,
+                height: 70,
+                width: 100,
               }}
             />
           </View>
@@ -135,10 +158,13 @@ const Home = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      {state.status === 'loading' ?
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      {state.status === "loading" ? (
+        <View
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+        >
           <ActivityIndicator size="large" />
-        </View> :
+        </View>
+      ) : (
         <>
           <View style={{ flex: 1 }}>
             <Image
@@ -146,39 +172,39 @@ const Home = ({ navigation, route }) => {
               source={require("../assets/images/Home.png")}
             />
           </View>
-          <ScrollView 
-        style={styles.scrollView}
-        horizontal= {true}
-        showsHorizontalScrollIndicator={false}
-        >
-          <View style={styles.listTab}>
-            {listTab.map((tab, index) => (
-              <TouchableOpacity
-                style={[
-                  styles.btnTab,
-                  list === tab && styles.btnTabActive,
-                ]}
-                key={index}
-                onPress={() => setListFilter(tab)}
-              >
-                <Text
-                  style={
-                    list === tab ? styles.textTabActive : styles.textTab
-                  }
+          <ScrollView
+            style={styles.scrollView}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          >
+            <View style={styles.listTab}>
+              {listTab.map((tab, index) => (
+                <TouchableOpacity
+                  style={[styles.btnTab, list === tab && styles.btnTabActive]}
+                  key={index}
+                  onPress={() => setListFilter(tab)}
                 >
-                  {tab}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
+                  <Text
+                    style={list === tab ? styles.textTabActive : styles.textTab}
+                  >
+                    {tab}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
           </ScrollView>
           <FlatList
-          contentContainerStyle={{flexGrow: 1, marginHorizontal: 20,justifyContent: 'center'}}
+            contentContainerStyle={{
+              flexGrow: 1,
+              marginHorizontal: 20,
+              justifyContent: "center",
+            }}
             data={state.data}
             renderItem={renderItem}
             keyExtractor={(item) => item._id}
           />
-        </>}
+        </>
+      )}
     </SafeAreaView>
   );
 };
@@ -187,11 +213,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight,
-    backgroundColor: "#ffffff"
+    backgroundColor: "#ffffff",
   },
   scrollView: {
     backgroundColor: "pink",
     marginHorizontal: 20,
+    marginVertical:100
   },
   text: {
     fontSize: 42,
@@ -212,7 +239,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 1,
     elevation: 8,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   textTabActive: {
     color: "#ffffff",
@@ -220,17 +247,17 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginRight: 10,
     textAlign: "center",
-    paddingHorizontal:20,
-    paddingVertical:12,
-    marginLeft: 5
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    marginLeft: 5,
   },
   textTab: {
     fontSize: 18,
     color: "#1974D2",
     textAlign: "center",
-    paddingHorizontal:20,
-    paddingVertical:12,
-    alignItems:'center'
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    alignItems: "center",
   },
   btnTabActive: {
     backgroundColor: "#1974D2",
@@ -242,9 +269,8 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     marginRight: 20,
     // padding: 10,
-        // width: DimensionsWindowWidth,
-        // height: "100%"
-
+    // width: DimensionsWindowWidth,
+    // height: "100%"
   },
   btnTab: {
     flexDirection: "row",
@@ -263,8 +289,8 @@ const styles = StyleSheet.create({
   scrollView: {
     // position: "absolute",
     width: "100%",
-    height: "36%"
-},
+    height: "36%",
+  },
 });
 
 export default Home;

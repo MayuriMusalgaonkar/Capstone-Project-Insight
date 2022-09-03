@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
     padding: 10,
     width: "80%",
     marginBottom: 20,
-    fontSize:18,
+    fontSize: 18,
   },
 
   textFonts: {

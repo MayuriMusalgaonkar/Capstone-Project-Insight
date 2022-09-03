@@ -8,7 +8,7 @@ import {
   View,
   Image,
   ActivityIndicator,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
@@ -53,13 +53,12 @@ const ContentDetails = ({ navigation, route }) => {
       }
     )
       .then((resp) => resp.json())
-      .then(
-        (responseJson) =>
-          setState({
-            data: responseJson.documents,
-            status: "resolved",
-            error: null,
-          })
+      .then((responseJson) =>
+        setState({
+          data: responseJson.documents,
+          status: "resolved",
+          error: null,
+        })
       )
       .catch((error) => setState({ data: {}, status: "error", error: error }));
   }
@@ -73,7 +72,7 @@ const ContentDetails = ({ navigation, route }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity
+      {/* <TouchableOpacity
       style={{marginLeft:20}}
       onPress={()=>{
         navigation.goBack()
@@ -87,7 +86,7 @@ const ContentDetails = ({ navigation, route }) => {
         >
 
         </Image>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       {state.status === "loading" ? (
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
@@ -97,59 +96,96 @@ const ContentDetails = ({ navigation, route }) => {
       ) : (
         // <View>
         //   <Text>{route.params?.itemId}</Text>
-        // </View> 
-        <View style={{ flex: 1,marginTop:50 }}>
+        // </View>
+        <View style={{ flex: 1 }}>
           <View>
             <Image
               source={require("../assets/images/bookmark1.png")}
               resizeMode="contain"
               style={{
-                height: 50, width: 50, position: "absolute", right: 20, top:-50,
+                height: 50,
+                width: 50,
+                position: "absolute",
+                right: 20,
+                top: -50,
               }}
             />
           </View>
           <ScrollView>
-            <View style={{marginHorizontal:15}}>
-            <View style={{ flexDirection: 'row', padding: 10, alignItems: "center" }} >
-
-              <View>
-                <Image
-                  source={require("../assets/images/ProfilePicture.png")}
-                  resizeMode="contain"
+            <View style={{ marginHorizontal: 15 }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  padding: 10,
+                  alignItems: "center",
+                }}
+              >
+                <View>
+                  <Image
+                    source={require("../assets/images/ProfilePicture.png")}
+                    resizeMode="contain"
+                    style={{
+                      borderRadius: 25,
+                      height: 40,
+                      width: 40,
+                    }}
+                  />
+                </View>
+                <View
                   style={{
-                    borderRadius: 25, height: 40, width: 40,
+                    marginLeft: 12,
+                    wordWrap: "break-all",
+                    width: "85%",
                   }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      color: "black",
+                      fontWeight: "bold",
+                      textTransform: "capitalize",
+                    }}
+                  >
+                    {"Full Name | And detailed information"}
+                  </Text>
+                </View>
+              </View>
+              <View>
+                <Text style={styles.title}>{route.params?.itemHeading}</Text>
+              </View>
+              <View
+                style={{
+                  width: "100%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Image
+                  source={require("../assets/images/ArticleContentImage.png")}
+                  resizeMode="contain"
+                  style={{ position: "relative", width: "92%" }}
                 />
               </View>
-              <View style={{ marginLeft: 12, wordWrap: "break-all", width: "85%" }}>
-                <Text
-                  style={{
-                    fontSize: 14, color: "black", fontWeight: 'bold', textTransform: 'capitalize',
-                  }}>
-                  {'Full Name | And detailed information'}
+              <View>
+                <Text style={styles.text}>
+                  Duis aute irure dolor in reprehenderit in voluptate velit esse
+                  cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor
+                  in reprehenderit in voluptate velit esse cillum dolore eu
+                  fugiat nulla pariatur. Duis aute irure dolor in reprehenderit
+                  in voluptate velit esse cillum dolore eu fugiat nulla
+                  pariatur. Duis aute irure dolor in reprehenderit in voluptate
+                  velit esse cillum dolore eu fugiat nulla pariatur.
+                </Text>
+                <Text style={styles.text}>
+                  Duis aute irure dolor in reprehenderit in voluptate velit esse
+                  cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor
+                  in reprehenderit in voluptate velit esse cillum dolore eu
+                  fugiat nulla pariatur. Duis aute irure dolor in reprehenderit
+                  in voluptate velit esse cillum dolore eu fugiat nulla
+                  pariatur. Duis aute irure dolor in reprehenderit in voluptate
+                  velit esse cillum dolore eu fugiat nulla pariatur.
                 </Text>
               </View>
-            </View>
-            <View>
-              <Text style={styles.title}>
-                {route.params?.itemHeading}
-              </Text>
-            </View>
-            <View style={{width:'100%',justifyContent: 'center',alignItems:'center'}}>
-              <Image
-                source={require("../assets/images/ArticleContentImage.png")}
-                resizeMode="contain"
-                style={{ position:'relative',width:'92%',}}
-              />
-            </View>
-            <View>
-              <Text style={styles.text}>
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-              </Text>
-              <Text style={styles.text}>
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-              </Text>
-            </View>
             </View>
           </ScrollView>
         </View>
@@ -162,7 +198,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: StatusBar.currentHeight,
-    backgroundColor: "#ffffff"
+    backgroundColor: "#ffffff",
   },
   item: {
     backgroundColor: "#f9c2ff",
