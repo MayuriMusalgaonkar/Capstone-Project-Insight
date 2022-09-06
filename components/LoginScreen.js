@@ -108,7 +108,8 @@ const Login = ({ navigation }) => {
             onChangeText={onChangePassword}
             value={password}
             placeholder="Password"
-            keyboardType="visible-password"
+            // keyboardType="visible-password"
+            secureTextEntry={true}
           />
           <Text
             style={[

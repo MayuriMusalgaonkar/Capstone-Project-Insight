@@ -19,8 +19,8 @@ const Home = ({ navigation, route }) => {
   console.log("Article List ");
 
   const [state, setState] = useState({ data: {}, status: "Idle", error: null });
-  const listTab = ["Your Interests", "Politics", "Entertainment"];
-  const [list, setList] = React.useState("Your Interests");
+  const listTab = ["Trending Articles", "Politics", "Entertainment"];
+  const [list, setList] = React.useState("Trending Articles");
 
   const setListFilter = (list) => {
     setList(list);
@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     textAlign: "center",
     paddingHorizontal: 20,
-    paddingVertical: 12,
+    paddingVertical: 10,
     marginLeft: 5,
   },
   textTab: {
