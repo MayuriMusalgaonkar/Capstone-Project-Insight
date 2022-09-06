@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-const Profile = () => {
+const Profile = ({navigation}) => {
   const listTab = ["Public", "Unlisted"];
   const [list, setList] = React.useState("Public");
 
@@ -20,7 +20,17 @@ const Profile = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+       <View style={styles.btnView}>
+          <Pressable
+            style={styles.btnPressable}
+            onPress={() => {
+              navigation.navigate("Login");
+            }}
+          >
+            <Text style={styles.signOutBtn}>Sign Out</Text>
+          </Pressable>
+        </View>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center",marginTop:-160 }}>
         <Image
           source={require("../assets/images/ProfilePagePicture.png")}
           resizeMode="contain"
@@ -30,7 +40,7 @@ const Profile = () => {
             width: 100,
           }}
         />
-        <Text style={{ fontSize: 20, paddingVertical: 10 }}>Full name</Text>
+        <Text style={{ fontSize: 20, paddingTop: 8 }}>Full name</Text>
         <Text style={{ fontSize: 15 }}>And detailed information</Text>
       </View>
       <View style={{ flex: 2, justifyContent: "center", marginTop: -10 }}>
@@ -144,6 +154,25 @@ const styles = StyleSheet.create({
     textAlign: "left",
     marginBottom: 12,
     marginHorizontal: 20,
+  },
+  btnPressable: {
+    width: 100,
+    borderRadius:42,
+    backgroundColor: "#1974D2",
+    paddingVertical: 16,
+  },
+  btnView: {
+    flex: 1,
+    justifyContent: 'flex-start',
+     alignItems: 'flex-end',
+     marginRight:10
+  },
+  signOutBtn: {
+    fontSize: 15,
+    lineHeight: 15,
+    letterSpacing: 0,
+    textAlign: "center",
+    color: "#ffffff",
   },
 });
 
